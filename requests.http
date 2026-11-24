@@ -1,0 +1,61 @@
+### Exemplos para a extensão REST Client do VS Code
+@base = http://localhost:8000/api
+
+### Saúde
+GET {{base}}/health/
+
+### Criar documento
+POST {{base}}/documentos/
+Content-Type: application/json
+
+{
+  "titulo": "Especificação de rebites - fuselagem",
+  "tipo": "especificacao",
+  "autor": "Engenharia",
+  "conteudo": "Define o tipo de rebite, diâmetro, passo e procedimento de instalação para os painéis da fuselagem traseira."
+}
+
+### Listar (mais novos primeiro)
+GET {{base}}/documentos/?limite=10
+
+### Filtrar por status
+GET {{base}}/documentos/?status=em_validacao
+
+### Detalhe (conta acesso no ranking)
+GET {{base}}/documentos/1/
+
+### Editar
+PATCH {{base}}/documentos/1/
+Content-Type: application/json
+
+{ "conteudo": "Conteúdo revisado." }
+
+### Submeter para validação
+POST {{base}}/documentos/1/submeter/
+
+### Tamanho da fila
+GET {{base}}/fila/
+
+### Próximo da fila
+POST {{base}}/fila/proximo/
+
+### Validar
+POST {{base}}/documentos/1/validar/
+Content-Type: application/json
+
+{ "aprovado": true, "comentario": "Conforme norma interna" }
+
+### Histórico
+GET {{base}}/documentos/1/historico/
+
+### Resumo com cache (chame duas vezes e compare "fonte" e "tempo_resposta_ms")
+GET {{base}}/documentos/1/resumo/
+
+### Ranking
+GET {{base}}/ranking/?n=5
+
+### Estatísticas
+GET {{base}}/estatisticas/
+
+### Excluir
+DELETE {{base}}/documentos/1/
